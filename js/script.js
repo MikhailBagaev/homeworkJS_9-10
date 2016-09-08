@@ -2,7 +2,6 @@
 
 $(function() {
     var jcarousel = $('.jcarousel');
-
     jcarousel
         .on('jcarousel:create jcarousel:reload', function() {
                 carousel = $(this),
@@ -57,30 +56,60 @@ $(function() {
         function(){
     $('.sub-menu li a').addClass('hover');
     });
-    //     },
-    //     function(){
-    // $('.sub-menu li a').removeClass('hover');
-        // });
+});  
 
+//script for select
+
+    $('.select').on('click','.placeholder',function(){  
+    var parent = $(this).closest('.select');
+       if ( ! parent.hasClass('is-open')){
+           parent.addClass('is-open');
+          $('.select.is-open').not(parent).removeClass('is-open');
+       }else{
+          parent.removeClass('is-open');
+       }
+    }).on('click','ul>li',function(){
+    var parent = $(this).closest('.select');
+    parent.removeClass('is-open').find('.placeholder').text( $(this).text() );
+    parent.find('input[type=hidden]').attr('value', $(this).attr('data-value') );
+    }); 
+//script for checkbox
+
+$(function(){
+	$(".niceCheck").mousedown(function() {
+		changeCheck($(this));
+    });
+    $(".niceCheck").each(function() {
+    	changeCheckStart($(this));
+    });
 });
+function changeCheck(el) {
+	var el = el,
+    input = el.find("input").eq(0);
+    if(!input.attr("checked")) {
+        el.css("background-position","0 -17px");    
+        input.attr("checked", true)
+    } else {
+        el.css("background-position","0 0"); 
+        input.attr("checked", false)
+    }
+    return true;
+}
+function changeCheckStart(el) {
+    var el = el,
+    input = el.find("input").eq(0);
+    if(input.attr("checked")) {
+        el.css("background-position","0 -17px");    
+    }
+    return true;
+}
 
 
-
-
-// $(function() {
-// 	$('.drop').mouseenter(function () {    
-//     $('.sub-menu').animate({
-//         background: '#fff'
-//     }, 500 );
-//     });
-//     $('drop').mouseleave(function() {
-//     $('.sub-menu').animate({
-//         background:'#ccc'
-//     }, 500 );    
-// });
   
 
-    
+
+
+   
 
 
     
